@@ -21,3 +21,17 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class BaseAddressModel(BaseModel):
+    """Base Address model for project."""
+
+    address_line_1 = models.CharField(max_length=256)
+    address_line_2 = models.CharField(max_length=256, blank=True, null=True)
+    landmark = models.CharField(max_length=128, blank=True, null=True)
+    city = models.CharField(max_length=128)
+    state = models.CharField(max_length=128)
+    zip_code = models.CharField(max_length=32)
+
+    class Meta:
+        abstract = True
