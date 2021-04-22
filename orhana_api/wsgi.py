@@ -11,6 +11,14 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'orhana_api.settings')
+default_settings = 'orhana_api.settings'
+
+environment = os.environ.get("ENV", "development")
+if environment == "production":
+    default_settings = 'orhana_api.settings_prod'
+
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', default_settings)
+
 
 application = get_wsgi_application()
