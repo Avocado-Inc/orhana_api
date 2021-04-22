@@ -128,4 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 orhana_api/settings.py
+orhana_api/settings.prod.py
 .idea
