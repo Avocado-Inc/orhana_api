@@ -1,3 +1,4 @@
+from .user_dto import UserAddressDto
 from .user_dto import UserCreateDto
 from .user_dto import UserUpdateDto
 from .user_login_dto import LoginDto
@@ -8,4 +9,5 @@ __all__ = [
     "RequestOtpDto",
     "UserCreateDto",
     "UserUpdateDto",
+    "UserAddressDto",
 ]

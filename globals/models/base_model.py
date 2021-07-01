@@ -33,7 +33,7 @@ class BaseAddressModel(BaseModel):
     landmark = models.CharField(max_length=128, blank=True, null=True)
     city = models.CharField(max_length=128)
     state = models.CharField(max_length=128)
-    zip_code = models.CharField(max_length=32)
+    zip_code = models.CharField(max_length=12)
 
     class Meta:
         abstract = True

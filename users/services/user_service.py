@@ -1,8 +1,11 @@
+from typing import List
 from uuid import UUID
 
+from users.dto.requests import UserAddressDto
 from users.dto.requests import UserCreateDto
 from users.dto.requests import UserUpdateDto
 from users.models import User
+from users.models import UserAddress
 
 
 class UserService:
@@ -34,3 +37,30 @@ class UserService:
         user = User.objects.filter(id=id).update(**body.simple_dict())
         user = User.objects.get(id=id)
         return user
+
+    @staticmethod
+    def add_address(body: UserAddressDto, user_id: UUID):
+        user_address = UserAddress.objects.create(
+            **{**body.simple_dict(), "user_id": user_id},
+        )
+        return user_address
+
+    @staticmethod
+    def update_address(id: UUID, body: UserAddressDto, user_id: UUID):
+        user_address = UserAddress.objects.filter(id=id).update(
+            **{**body.simple_dict(), "user_id": user_id},
+        )
+        user_address = UserAddress.objects.filter(id=id, user_id=user_id).first()
+        return user_address
+
+    @staticmethod
+    def get_user_addresses(user_id: UUID) -> List[UserAddress]:
+        user_addresses = UserAddress.objects.filter(user_id=user_id).order_by(
+            "-created_at",
+        )
+        return user_addresses
+
+    @staticmethod
+    def get_user_address_by_id(id: UUID, user_id: UUID) -> List[UserAddress]:
+        user_addresses = UserAddress.objects.filter(id=id, user_id=user_id).first()
+        return user_addresses

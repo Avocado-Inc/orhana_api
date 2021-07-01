@@ -1,5 +1,6 @@
 from django.db import models
 
+from globals.constants import AddressTypeConstants
 from globals.models import BaseAddressModel
 from globals.models import BaseModel
 
@@ -16,5 +17,9 @@ class User(BaseModel):
 
 
 class UserAddress(BaseAddressModel):
-    type_of_address = models.CharField(max_length=20)
+    user = models.ForeignKey("users.User", on_delete=models.RESTRICT)
+    type_of_address = models.CharField(
+        max_length=20,
+        choices=AddressTypeConstants.choices,
+    )
     is_default = models.BooleanField(default=False, db_index=True)
