@@ -11,7 +11,10 @@ class User(BaseModel):
     profile_pic_url = models.URLField(null=True, blank=True)
     email_verified = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"{self.id} | {self.name}"
+
 
 class UserAddress(BaseAddressModel):
     type_of_address = models.CharField(max_length=20)
-    is_default = models.BooleanField(default=False, index=True)
+    is_default = models.BooleanField(default=False, db_index=True)

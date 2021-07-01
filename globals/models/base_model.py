@@ -22,6 +22,8 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+    objects = models.QuerySet
+
 
 class BaseAddressModel(BaseModel):
     """Base Address model for project."""
