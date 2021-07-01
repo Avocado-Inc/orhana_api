@@ -3,6 +3,7 @@ from datetime import datetime
 from datetime import timedelta
 
 import jwt
+from django.core.handlers.wsgi import WSGIRequest
 from rest_framework.request import Request
 
 from .user_service import UserService
@@ -34,6 +35,18 @@ class AuthService:
         token = AuthService.extract_token(request)
         decoded = jwt.decode(
             token,
+            JWT_AUTH.get("ACCESS_TOKEN_SECRET"),
+            algorithms=JWT_AUTH.get("ALGORITHM"),
+        )
+        decoded.pop("issuer")
+        decoded.pop("exp")
+        return CurrentUser(**decoded)
+
+    @staticmethod
+    def verify_auth_access_token_middleware(request: WSGIRequest):
+        token = request.headers["Authorization"]
+        decoded = jwt.decode(
+            re.sub(JWT_AUTH.get("REGEX"), "", token, 0, re.MULTILINE),
             JWT_AUTH.get("ACCESS_TOKEN_SECRET"),
             algorithms=JWT_AUTH.get("ALGORITHM"),
         )

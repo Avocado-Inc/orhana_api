@@ -20,10 +20,9 @@ from django.urls import path
 from users.routers.v1 import V1AuthRouter
 from users.routers.v1 import V1UserRouter
 
-print(V1AuthRouter.urls)
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(V1AuthRouter.urls)),
     path("api/", include(V1UserRouter.urls)),
-    # path("api/", include("users.routers.v1.user_router_v1")),
 ]
