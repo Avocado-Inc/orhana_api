@@ -1,5 +1,6 @@
 from pprint import pprint
 from typing import List
+from uuid import UUID
 
 from pydantic import parse_obj_as
 
@@ -52,3 +53,8 @@ class ProductService:
         except Exception as e:
             print(e)
             return []
+
+    @staticmethod
+    def get_product_by_id(id: UUID, is_active: bool = True):
+        product = Product.objects.filter(id=id, is_active=is_active).first()
+        return product

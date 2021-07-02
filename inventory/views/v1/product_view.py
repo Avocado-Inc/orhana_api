@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 
 from inventory.dto.requests import ProductListQueryDto
+from inventory.dto.response import ProductResponse
 from inventory.services import ProductService
 
 
@@ -36,6 +37,22 @@ class ProductView(ViewSet):
             )
         return Response(
             data=[],
+            status=status.HTTP_200_OK,
+            content_type="application/json",
+        )
+
+    @action(methods=["GET"], detail=True)
+    def get_product(self, request: Request, pk, *args, **kwargs):
+        product = ProductService.get_product_by_id(pk)
+        if not product:
+            return Response(
+                data={"message": "No such products"},
+                status=status.HTTP_400_BAD_REQUEST,
+                content_type="application/json",
+            )
+
+        return Response(
+            data=ProductResponse.from_orm(product).simple_dict(),
             status=status.HTTP_200_OK,
             content_type="application/json",
         )
