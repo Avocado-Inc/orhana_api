@@ -13,6 +13,8 @@ class AuthMiddleware:
             return self.get_response(request)
         elif request.path.__contains__("auth"):
             return self.get_response(request)
+        elif request.path.__contains__("admin"):
+            return self.get_response(request)
         else:
             try:
                 current_user = AuthService.verify_auth_access_token_middleware(request)
