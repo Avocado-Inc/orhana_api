@@ -33,6 +33,7 @@ class UserAddressDto(BaseDto):
     zip_code: str
     type_of_address: AddressTypeConstants.ENUMS
     is_default: bool = False
+    name: str
 
     @validator("address_line_1", allow_reuse=True)
     def validate_address_line_1(cls, v: str):

@@ -17,6 +17,7 @@ class User(BaseModel):
 
 
 class UserAddress(BaseAddressModel):
+    name = models.CharField(max_length=50, blank=True)
     user = models.ForeignKey("users.User", on_delete=models.RESTRICT)
     type_of_address = models.CharField(
         max_length=20,

@@ -11,6 +11,10 @@ from users.models import UserAddress
 class UserService:
     @staticmethod
     def _create_user(user: UserCreateDto) -> User:
+        """create's basic user with mobile number and other optional details.
+
+        :returns User
+        """
         user = User.objects.create(**user.simple_dict())
         return user
 
