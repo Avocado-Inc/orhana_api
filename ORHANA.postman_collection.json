@@ -6,165 +6,323 @@
 	},
 	"item": [
 		{
-			"name": "OTP VALIDATION",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"mobile_no\": \"1234567890\",\n    \"role\": \"CUSTOMER\",\n    \"otp\": \"123456\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "OTP VALIDATION",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobile_no\": \"1234567890\",\n    \"role\": \"CUSTOMER\",\n    \"otp\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/auth/validate_otp/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"validate_otp",
+								""
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/auth/validate_otp/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"v1",
-						"auth",
-						"validate_otp",
-						""
-					]
+				{
+					"name": "REQUEST OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"mobile_no\": \"1234567890\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/auth/request_otp/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"request_otp",
+								""
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "REQUEST OTP",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"mobile_no\": \"1234567890\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "PRODUCTS",
+			"item": [
+				{
+					"name": "LIST PRODUCTS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYzA2Yzg0ZjItMTNmOS00MzY3LWJhNDEtY2E2YjZjMGNhZmZlIiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTYwMTQ4MH0.fKgl02q24kuR2t8NwIrwyA6nNDAB-xoxodgDXvwEUlk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/product/list_products/?sort_key=created_at&sort_direction=-&page=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"list_products",
+								""
+							],
+							"query": [
+								{
+									"key": "sort_key",
+									"value": "created_at"
+								},
+								{
+									"key": "sort_direction",
+									"value": "-"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/auth/request_otp/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"v1",
-						"auth",
-						"request_otp",
-						""
-					]
+				{
+					"name": "GET SINGLE PRODUCT BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYzA2Yzg0ZjItMTNmOS00MzY3LWJhNDEtY2E2YjZjMGNhZmZlIiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTYwMTQ4MH0.fKgl02q24kuR2t8NwIrwyA6nNDAB-xoxodgDXvwEUlk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/product/1b2d118b-a67c-4e19-94d8-8e8aa791ed76/get_product/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"1b2d118b-a67c-4e19-94d8-8e8aa791ed76",
+								"get_product",
+								""
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "LIST PRODUCTS",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
+			"name": "USER",
+			"item": [
+				{
+					"name": "ADDRESS",
+					"item": [
 						{
-							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYzA2Yzg0ZjItMTNmOS00MzY3LWJhNDEtY2E2YjZjMGNhZmZlIiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTYwMTQ4MH0.fKgl02q24kuR2t8NwIrwyA6nNDAB-xoxodgDXvwEUlk",
-							"type": "string"
+							"name": "ADD ADDRESS",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTY3MjE2Mn0.cwJngGbsPSZvVn_1PGpyBW8SoUS81oH_jTWlg1NZeD4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Name of Recipient\",\n    \"address_line_1\": \"Required Field\",\n    \"address_line_2\": \"Optional\",\n    \"landmark\": \"Optional\",\n    \"city\": \"Required\",\n    \"state\": \"Required\",\n    \"zip_code\": \"495004\",\n    \"type_of_address\": \"HOME\",\n    \"is_default\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/v1/user/address/add_address/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"address",
+										"add_address",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE AN ADDRESS",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTY3MjE2Mn0.cwJngGbsPSZvVn_1PGpyBW8SoUS81oH_jTWlg1NZeD4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Name of Recipient\",\n    \"address_line_1\": \"Required Field\",\n    \"address_line_2\": \"Optional\",\n    \"landmark\": \"Optional\",\n    \"city\": \"Required\",\n    \"state\": \"Required\",\n    \"zip_code\": \"495004\",\n    \"type_of_address\": \"HOME\",\n    \"is_default\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/v1/user/address/add_address/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"address",
+										"add_address",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LIST ADDRESS",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTY3MjE2Mn0.cwJngGbsPSZvVn_1PGpyBW8SoUS81oH_jTWlg1NZeD4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/v1/user/address/list_address/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"address",
+										"list_address",
+										""
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/product/list_products/?sort_key=created_at&sort_direction=-&page=0&limit=10",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"v1",
-						"product",
-						"list_products",
-						""
-					],
-					"query": [
-						{
-							"key": "sort_key",
-							"value": "created_at"
-						},
-						{
-							"key": "sort_direction",
-							"value": "-"
-						},
-						{
-							"key": "page",
-							"value": "0"
-						},
-						{
-							"key": "limit",
-							"value": "10"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET SINGLE PRODUCT BY ID",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYzA2Yzg0ZjItMTNmOS00MzY3LWJhNDEtY2E2YjZjMGNhZmZlIiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTYwMTQ4MH0.fKgl02q24kuR2t8NwIrwyA6nNDAB-xoxodgDXvwEUlk",
-							"type": "string"
-						}
-					]
+				{
+					"name": "GET MY PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
 				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8000/api/v1/product/1b2d118b-a67c-4e19-94d8-8e8aa791ed76/get_product/",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8000",
-					"path": [
-						"api",
-						"v1",
-						"product",
-						"1b2d118b-a67c-4e19-94d8-8e8aa791ed76",
-						"get_product",
-						""
-					]
+				{
+					"name": "UPDATE PROFILE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }

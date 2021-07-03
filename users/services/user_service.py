@@ -62,7 +62,7 @@ class UserService:
         user_addresses = UserAddress.objects.filter(user_id=user_id).order_by(
             "-created_at",
         )
-        return user_addresses
+        return list(user_addresses)
 
     @staticmethod
     def get_user_address_by_id(id: UUID, user_id: UUID) -> List[UserAddress]:

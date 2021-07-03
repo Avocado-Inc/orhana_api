@@ -18,6 +18,7 @@ class UserAddressViewSet(ViewSet):
 
         current_user = request._request.current_user
         user_addresses = UserService.get_user_addresses(current_user.user_id)
+        print(user_addresses[0])
         data = parse_obj_as(List[UserAddressResponse], user_addresses)
         return Response(
             data=[item.simple_dict() for item in data],
@@ -43,6 +44,10 @@ class UserAddressViewSet(ViewSet):
         try:
             body = UserAddressDto(**request.data)
         except Exception as e:
+            import traceback
+
+            traceback.print_exc()
+            print(e)
             return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         user_address = UserService.add_address(body=body, user_id=current_user.user_id)
         return Response(
