@@ -4,7 +4,11 @@
 
 ***Database Setup***
 
-Download and Install PostgresSQL if not present. After installing run below in plsql client command to create database
+Download and Install PostgresSQL if not present.
+- for mac os https://postgresapp.com/downloads.html
+- other download page https://www.postgresql.org/download
+
+After installing run below in plsql client command to create database
 ```shell
 create database orhana;
 ```
