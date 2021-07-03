@@ -22,7 +22,7 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-    objects = models.QuerySet
+    objects: models.manager.QuerySet = models.manager.QuerySet
 
 
 class BaseAddressModel(BaseModel):

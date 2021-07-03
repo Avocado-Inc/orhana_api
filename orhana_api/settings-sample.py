@@ -124,3 +124,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+
+"""
+OUR CONFIGS
+"""
+
+
+JWT_AUTH = {
+    "ACCESS_TOKEN_SECRET": "NV0XSoiYfjeVuKs11SQLLEGMeJjrn1GtgHPdOIEksSj6AZF3hObtq6LBd3kPEhEr",
+    "REFRESH_TOKEN_SECRET": "8hAwgDkASYndZC9RYwO2A4imbpVyJfgza6p8GBVHGuEyLS2WBUVGpM72irDnsbcL",
+    "ACCESS_EXPIRY": 360000,
+    "REFRESH_EXPIRY": 900000,
+    "ALGORITHM": "HS256",
+    "REGEX": r"Bearer\s",
+}
