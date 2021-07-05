@@ -3,8 +3,9 @@ from datetime import datetime
 from datetime import timedelta
 
 import jwt
+from asgiref.sync import sync_to_async
 from django.core.handlers.wsgi import WSGIRequest
-from rest_framework.request import Request
+from fastapi import Request
 
 from .user_service import UserService
 from globals.dto import CurrentUser
@@ -25,9 +26,7 @@ class AuthService:
         :return: Token
         """
 
-        token: str = request.__dict__.get("_request").__dict__.get(
-            "environ",
-        )["HTTP_AUTHORIZATION"]
+        token: str = request.headers.get("authorization")
         return re.sub(JWT_AUTH.get("REGEX"), "", token, 0, re.MULTILINE)
 
     @staticmethod
@@ -85,6 +84,7 @@ class AuthService:
         return {"access_token": access_token, "refresh_token": token}
 
     @staticmethod
+    @sync_to_async
     def send_otp(mobile_no: str) -> dict:
         otp = random_number_string(n=6)
         # user_otp: UserOtp = UserOtp.objects.filter(
@@ -106,6 +106,7 @@ class AuthService:
         return True
 
     @staticmethod
+    @sync_to_async
     def login_mobile(data: LoginDto) -> dict:
         validated = AuthService._validate_otp(data.mobile_no, data.otp)
         if validated:

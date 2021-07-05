@@ -1,6 +1,8 @@
 from typing import List
 from uuid import UUID
 
+from asgiref.sync import sync_to_async
+
 from users.dto.requests import UserAddressDto
 from users.dto.requests import UserCreateDto
 from users.dto.requests import UserUpdateDto
@@ -32,17 +34,20 @@ class UserService:
             )
 
     @staticmethod
+    @sync_to_async
     def get_user_by_id(id: UUID) -> User:
         user = User.objects.get(id=id)
         return user
 
     @staticmethod
+    @sync_to_async
     def update_user(id: UUID, body: UserUpdateDto) -> User:
         user = User.objects.filter(id=id).update(**body.simple_dict())
         user = User.objects.get(id=id)
         return user
 
     @staticmethod
+    @sync_to_async
     def add_address(body: UserAddressDto, user_id: UUID):
         user_address = UserAddress.objects.create(
             **{**body.simple_dict(), "user_id": user_id},
@@ -50,6 +55,7 @@ class UserService:
         return user_address
 
     @staticmethod
+    @sync_to_async
     def update_address(id: UUID, body: UserAddressDto, user_id: UUID):
         user_address = UserAddress.objects.filter(id=id).update(
             **{**body.simple_dict(), "user_id": user_id},
