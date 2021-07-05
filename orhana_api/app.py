@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.wsgi import WSGIMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from inventory.routers.v1 import inventory_app_router
 from orhana_api.wsgi import application
 from users.routers.v1 import user_app_router
 
@@ -28,4 +29,5 @@ def create_app() -> FastAPI:
         name="static",
     )
     app.include_router(user_app_router, prefix="/api")
+    app.include_router(inventory_app_router, prefix="/api")
     return app

@@ -1,8 +1,29 @@
-from rest_framework.routers import DefaultRouter
+from uuid import UUID
 
-from inventory.views.v1 import ProductView
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import status
+from fastapi.responses import JSONResponse
 
-prefix_products = "v1/product"
+from globals.dto import CurrentUser
+from globals.exceptions import NotFoundException
+from inventory.dto.response import ProductResponse
+from inventory.services import ProductService
+from users.services import AuthService
 
-v1_product_router = DefaultRouter()
-v1_product_router.register(f"{prefix_products}", ProductView, basename="product_view")
+
+product_router = APIRouter(tags=["Product"])
+
+
+@product_router.get("/{product_id}", response_model=ProductResponse)
+def get_product_details(
+    product_id: UUID,
+    current_user: CurrentUser = Depends(AuthService.verify_auth_access_token),
+):
+    product = ProductService.get_product_by_id(product_id)
+    if not product:
+        raise NotFoundException(detail="No product found")
+    return JSONResponse(
+        content=ProductResponse.from_orm(product).simple_dict(),
+        status_code=status.HTTP_200_OK,
+    )

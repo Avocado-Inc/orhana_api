@@ -14,12 +14,12 @@ user_api_router = APIRouter(tags=["User"])
 
 
 @user_api_router.put("/", response_model=UserResponse)
-async def update_profile(
+def update_profile(
     request: Request,
     body: UserUpdateDto,
     current_user: CurrentUser = Depends(AuthService.verify_auth_access_token),
 ):
-    user_updated = await UserService.update_user(current_user.user_id, body=body)
+    user_updated = UserService.update_user(current_user.user_id, body=body)
     return JSONResponse(
         content=UserResponse.from_orm(user_updated).simple_dict(),
         status_code=status.HTTP_202_ACCEPTED,
@@ -27,11 +27,11 @@ async def update_profile(
 
 
 @user_api_router.get("/", response_model=UserResponse)
-async def my_profile(
+def my_profile(
     request: Request,
     current_user: CurrentUser = Depends(AuthService.verify_auth_access_token),
 ):
-    user = await UserService.get_user_by_id(current_user.user_id)
+    user = UserService.get_user_by_id(current_user.user_id)
     return JSONResponse(
         content=UserResponse.from_orm(user).simple_dict(),
         status_code=status.HTTP_202_ACCEPTED,
