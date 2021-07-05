@@ -26,7 +26,7 @@ async def update_profile(
     )
 
 
-@user_api_router.get("/")
+@user_api_router.get("/", response_model=UserResponse)
 async def my_profile(
     request: Request,
     current_user: CurrentUser = Depends(AuthService.verify_auth_access_token),
