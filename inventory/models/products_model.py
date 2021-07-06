@@ -12,6 +12,7 @@ class Product(BaseModel):
     sub_category = models.ForeignKey("inventory.SubCategory", on_delete=models.CASCADE)
     max_selling_price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveBigIntegerField()
+    main_image = models.ImageField(default=None, null=True, blank=True)
 
     def __str__(self):
         return f"{self.product_name} - {self.id}"
