@@ -34,7 +34,7 @@ def add_item_cart(
     if product.quantity < 1:
         raise BadRequestException(detail="Out of stock")
     if product.quantity < body.quantity:
-        body.quantity = product.quantitys
+        body.quantity = product.quantity
     shopping_cart = ShoppingCart.objects.filter(purchased=False, is_active=True).first()
     if not shopping_cart:
         shopping_cart = ShoppingCart.objects.create(user_id=current_user.user_id)
