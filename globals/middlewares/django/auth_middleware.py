@@ -9,11 +9,15 @@ class AuthMiddleware:
         self.get_response = get_response
 
     def __call__(self, request: WSGIRequest):
+        print("CALLED")
+        print(request.path)
         if request.path.__contains__("public"):
             return self.get_response(request)
         elif request.path.__contains__("auth"):
             return self.get_response(request)
         elif request.path.__contains__("admin"):
+            return self.get_response(request)
+        elif request.path.__contains__("swagger"):
             return self.get_response(request)
         else:
             try:

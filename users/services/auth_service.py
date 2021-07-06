@@ -4,7 +4,7 @@ from datetime import timedelta
 
 import jwt
 from django.core.handlers.wsgi import WSGIRequest
-from rest_framework.request import Request
+from fastapi import Request
 
 from .user_service import UserService
 from globals.dto import CurrentUser
@@ -25,9 +25,7 @@ class AuthService:
         :return: Token
         """
 
-        token: str = request.__dict__.get("_request").__dict__.get(
-            "environ",
-        )["HTTP_AUTHORIZATION"]
+        token: str = request.headers.get("authorization")
         return re.sub(JWT_AUTH.get("REGEX"), "", token, 0, re.MULTILINE)
 
     @staticmethod

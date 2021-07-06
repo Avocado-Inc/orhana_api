@@ -1,4 +1,12 @@
-from .user_router_v1 import v1_auth_router as V1AuthRouter
-from .user_router_v1 import v1_user_router as V1UserRouter
+from fastapi import APIRouter
 
-__all__ = ["V1AuthRouter", "V1UserRouter"]
+from .auth_router import auth_api_router
+from .user_router import user_api_router
+
+
+user_app_router = APIRouter(prefix="/v1")
+user_app_router.include_router(auth_api_router, prefix="/auth")
+user_app_router.include_router(user_api_router, prefix="/user")
+
+
+__all__ = ["user_app_router"]

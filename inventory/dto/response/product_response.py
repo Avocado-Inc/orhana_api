@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Optional
+from typing import Union
 from uuid import UUID
 
 from pydantic import validator
@@ -14,11 +15,15 @@ class ProductImageResponse(BaseDbResponse):
 
 
 class ProductListResponse(BaseDbResponse):
-    id: UUID
+    id: Union[UUID, str]
     product_name: str
     max_selling_price: float
     image: Optional[ProductImageResponse]
     created_at: datetime
+
+    @validator("id")
+    def validate_id(cls, v: Union[UUID, str]):
+        return v.__str__()
 
     @validator("product_name")
     def validate_product_name(cls, v: str):
@@ -26,10 +31,14 @@ class ProductListResponse(BaseDbResponse):
 
 
 class ProductResponse(BaseDbResponse):
-    id: UUID
+    id: Union[UUID, str]
     product_name: str
     max_selling_price: float
     quantity: int
+
+    @validator("id")
+    def validate_id(cls, v: Union[UUID, str]):
+        return v.__str__()
 
     @validator("product_name")
     def validate_product_name(cls, v: str):

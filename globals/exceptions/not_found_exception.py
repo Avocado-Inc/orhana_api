@@ -1,0 +1,12 @@
+from fastapi import HTTPException
+from fastapi import status
+
+
+class NotFoundException(HTTPException):
+    def __init__(
+        self,
+        status_code: int = status.HTTP_404_NOT_FOUND,
+        detail=None,
+        headers=None,
+    ):
+        super().__init__(status_code, detail=detail, headers=headers)
