@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "globals",
     "users",
     "inventory",
+    "orders",
 ]
 
 MIDDLEWARE = [

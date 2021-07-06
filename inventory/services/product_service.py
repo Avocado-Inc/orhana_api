@@ -58,3 +58,7 @@ class ProductService:
     def get_product_by_id(id: UUID, is_active: bool = True):
         product = Product.objects.filter(id=id, is_active=is_active).first()
         return product
+
+    @staticmethod
+    def update_product_quantity(id: UUID, quantity: int):
+        Product.objects.filter(id=id, is_active=True).update(quantity=quantity)
