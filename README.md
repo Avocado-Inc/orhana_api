@@ -77,7 +77,7 @@ Create super user if not exists
 python manage.py createsuperuser
 ```
 
-To login into django admin panel go to http://localhost:8000/admin
+To login into django admin panel go to http://localhost:8000/django/admin
 
 ### Documentation
 
