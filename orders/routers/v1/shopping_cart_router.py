@@ -64,7 +64,7 @@ def add_item_cart(
         + cart_item.quantity
         + cart_item.unit_price,
     )
-    item = ShoppingCartItemResponse.from_orm(cart_item)
+    item = ShoppingCartItemResponse.from_orm(cart_item).simple_dict()
     return JSONResponse(
         content=item,
         status_code=status.HTTP_201_CREATED,
