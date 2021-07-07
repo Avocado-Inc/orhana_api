@@ -6,7 +6,7 @@ class LoginDto(BaseDto):
     # id_token: str
     otp: str
     mobile_no: str
-    role: str = RoleConstants.ENUMS.CUSTOMER.value
+    role: RoleConstants.ENUMS = RoleConstants.ENUMS.CUSTOMER.value
 
 
 class RequestOtpDto(BaseDto):

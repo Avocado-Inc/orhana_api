@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import Optional
 from typing import Union
 from uuid import UUID
@@ -19,7 +18,6 @@ class ProductListResponse(BaseDbResponse):
     product_name: str
     max_selling_price: float
     image: Optional[ProductImageResponse]
-    created_at: datetime
 
     @validator("id")
     def validate_id(cls, v: Union[UUID, str]):
@@ -35,6 +33,7 @@ class ProductResponse(BaseDbResponse):
     product_name: str
     max_selling_price: float
     quantity: int
+    description: Optional[str]
 
     @validator("id")
     def validate_id(cls, v: Union[UUID, str]):

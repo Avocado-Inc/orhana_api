@@ -7,8 +7,11 @@ from fastapi import status
 from fastapi.responses import JSONResponse
 from pydantic import parse_obj_as
 
+from globals.constants import ProductListingSortKey
+from globals.constants import SortDirection
 from globals.dto import CurrentUser
 from globals.exceptions import NotFoundException
+from inventory.dto.response import ProductListResponse
 from inventory.dto.response import ProductResponse
 from inventory.models import Product
 from inventory.services import ProductService
@@ -18,22 +21,22 @@ from users.services import AuthService
 product_router = APIRouter(tags=["Product"])
 
 
-@product_router.get("/", response_model=List[ProductResponse])
+@product_router.get("/", response_model=List[ProductListResponse])
 def list_products(
     page: int = 0,
     limit: int = 15,
-    sort_key: str = "created_at",
-    sort_direction: str = "-",
+    sort_key: ProductListingSortKey.ENUM = ProductListingSortKey.ENUM.CREATED_AT.value,
+    sort_direction: SortDirection.ENUM = SortDirection.ENUM.DESC.value,
     current_user: CurrentUser = Depends(AuthService.verify_auth_access_token),
 ):
     products = list(
         Product.objects.filter(is_active=True).order_by(
-            f"{sort_direction.strip()}{sort_key.strip().lower()}",
+            f"{sort_direction.value.strip()}{sort_key.value.strip().lower()}",
         ),
     )
     if products.__len__():
         products = products[page * limit : page * limit + limit]
-        products = parse_obj_as(List[ProductResponse], products)
+        products = parse_obj_as(List[ProductListResponse], products)
         return JSONResponse(
             content=[product.simple_dict() for product in products],
             status_code=status.HTTP_200_OK,

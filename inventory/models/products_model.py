@@ -13,6 +13,13 @@ class Product(BaseModel):
     max_selling_price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveBigIntegerField()
     main_image = models.ImageField(default=None, null=True, blank=True)
+    description = models.TextField(
+        max_length=GlobalModelConstants.CharLengthConstants.L8192,
+        null=True,
+        blank=True,
+        default="Product description",
+        help_text="Add product description",
+    )
 
     def __str__(self):
         return f"{self.product_name} - {self.id}"
