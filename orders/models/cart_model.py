@@ -7,7 +7,7 @@ class ShoppingCart(BaseModel):
     user = models.ForeignKey("users.User", on_delete=models.RESTRICT)
     purchased = models.BooleanField(default=False)
     total = models.DecimalField(max_digits=10, decimal_places=2)
-    number_of_items = models.PositiveSmallIntegerField(default=1)
+    number_of_items = models.PositiveSmallIntegerField(default=0)
 
 
 class ShoppingCartItem(BaseModel):

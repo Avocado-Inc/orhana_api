@@ -37,7 +37,10 @@ def add_item_cart(
         body.quantity = product.quantity
     shopping_cart = ShoppingCart.objects.filter(purchased=False, is_active=True).first()
     if not shopping_cart:
-        shopping_cart = ShoppingCart.objects.create(user_id=current_user.user_id)
+        shopping_cart = ShoppingCart.objects.create(
+            user_id=current_user.user_id,
+            total=0,
+        )
     cart_item = ShoppingCartItem.objects.filter(
         shopping_cart=shopping_cart,
         shopping_cart__purchased=False,
@@ -48,6 +51,7 @@ def add_item_cart(
     )
     if cart_item:
         cart_item.update(quantity=F("quantity") + body.quantity)
+        cart_item = cart_item.first()
     if not cart_item:
         cart_item = ShoppingCartItem.objects.create(
             item_id=body.item_id,
@@ -61,7 +65,6 @@ def add_item_cart(
         total=F(
             "total",
         )
-        + cart_item.quantity
         + cart_item.unit_price,
     )
     item = ShoppingCartItemResponse.from_orm(cart_item).simple_dict()
@@ -97,25 +100,23 @@ def update_quantity(
             shopping_cart_id=cart_item.shopping_cart.id,
             is_active=True,
         )
-        .annotate(
-            final_price=F("quantity") + F("unit_price"),
-            number_of_items=F("number_of_items"),
-        )
+        .values("quantity", "unit_price")
         .aggregate(
-            final_price=Sum("final_price", number_of_items=Sum("number_of_items")),
+            final_price=Sum(F("quantity") * F("unit_price")),
+            number_of_items=Sum(F("quantity")),
         )
     )
     ShoppingCart.objects.filter(
-        id=cart_item.shopping_cart,
-        shopping_cart__purchased=False,
-        shopping_cart__is_active=True,
+        id=cart_item.shopping_cart.id,
+        purchased=False,
+        is_active=True,
     ).update(
         total=cart_items.get("final_price"),
         number_of_items=cart_items.get("number_of_items"),
     )
-    item = ShoppingCartItemResponse.from_orm(cart_item)
+    item = ShoppingCartItemResponse.from_orm(cart_item).simple_dict()
     return JSONResponse(
-        content=item.simple_dict(),
+        content=item,
         status_code=status.HTTP_200_OK,
     )
 
@@ -147,12 +148,40 @@ def get_cart_item_by_id(
     "/shopping-cart/{shopping_cart_id}",
     response_model=List[ShoppingCartItemResponse],
 )
-def list_cart_items(
+def list_cart_items_by_shopping_cart_id(
     shopping_cart_id: UUID,
     current_user: CurrentUser = Depends(AuthService.verify_auth_access_token),
 ):
     cart_items = ShoppingCartItem.objects.filter(
         shopping_cart_id=shopping_cart_id,
+        user_id=current_user.user_id,
+        is_active=True,
+    )
+    cart_items = parse_obj_as(List[ShoppingCartItemResponse], list(cart_items))
+    if cart_items.__len__():
+        return JSONResponse(
+            content=[item.simple_dict() for item in cart_items],
+            status_code=status.HTTP_200_OK,
+        )
+    raise NotFoundException(detail="Cart is empty")
+
+
+@shopping_cart_item_router.get(
+    "/",
+    response_model=List[ShoppingCartItemResponse],
+)
+def list_cart_items(
+    current_user: CurrentUser = Depends(AuthService.verify_auth_access_token),
+):
+    shopping_cart = ShoppingCart.objects.filter(
+        purchased=False,
+        is_active=True,
+        user_id=current_user.user_id,
+    ).first()
+    if not shopping_cart:
+        raise NotFoundException(detail="Cart is empty")
+    cart_items = ShoppingCartItem.objects.filter(
+        shopping_cart_id=shopping_cart.id,
         user_id=current_user.user_id,
         is_active=True,
     )
