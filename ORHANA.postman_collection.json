@@ -179,7 +179,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYzA2Yzg0ZjItMTNmOS00MzY3LWJhNDEtY2E2YjZjMGNhZmZlIiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTYwMTQ4MH0.fKgl02q24kuR2t8NwIrwyA6nNDAB-xoxodgDXvwEUlk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTY3MjE2Mn0.cwJngGbsPSZvVn_1PGpyBW8SoUS81oH_jTWlg1NZeD4",
 									"type": "string"
 								}
 							]
@@ -187,7 +187,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/product/1b2d118b-a67c-4e19-94d8-8e8aa791ed76/get_product/",
+							"raw": "http://127.0.0.1:8000/api/v1/product/f3fe54f0-347b-48a8-879d-aedc471ab067",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -200,9 +200,7 @@
 								"api",
 								"v1",
 								"product",
-								"1b2d118b-a67c-4e19-94d8-8e8aa791ed76",
-								"get_product",
-								""
+								"f3fe54f0-347b-48a8-879d-aedc471ab067"
 							]
 						}
 					},
@@ -241,7 +239,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8000/api/v1/user/address/add_address/",
+									"raw": "http://localhost:8000/api/v1/user/address/",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -252,7 +250,6 @@
 										"v1",
 										"user",
 										"address",
-										"add_address",
 										""
 									]
 								}
@@ -272,7 +269,7 @@
 										}
 									]
 								},
-								"method": "POST",
+								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -284,7 +281,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8000/api/v1/user/address/add_address/",
+									"raw": "http://localhost:8000/api/v1/user/address/83e3234e-f833-4fc1-9c18-69b1291d474b",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -295,8 +292,7 @@
 										"v1",
 										"user",
 										"address",
-										"add_address",
-										""
+										"83e3234e-f833-4fc1-9c18-69b1291d474b"
 									]
 								}
 							},
@@ -318,7 +314,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8000/api/v1/user/address/list_address/",
+									"raw": "http://localhost:8000/api/v1/user/address/",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -329,8 +325,40 @@
 										"v1",
 										"user",
 										"address",
-										"list_address",
 										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LIST ADDRESS Copy",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTY3MjE2Mn0.cwJngGbsPSZvVn_1PGpyBW8SoUS81oH_jTWlg1NZeD4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/v1/user/address/83e3234e-f833-4fc1-9c18-69b1291d474b",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"address",
+										"83e3234e-f833-4fc1-9c18-69b1291d474b"
 									]
 								}
 							},

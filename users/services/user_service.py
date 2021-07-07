@@ -12,7 +12,7 @@ from users.models import UserAddress
 class UserService:
     @staticmethod
     def _create_user(user: UserCreateDto) -> User:
-        """create's basic user with mobile number and other optional details.
+        """creates basic user with mobile number and other optional details.
 
         :returns User
         """
@@ -21,6 +21,7 @@ class UserService:
 
     @staticmethod
     def get_user_by_mobile(mobile: str) -> Tuple[User, bool]:
+        """Get user by mobile."""
         created = False
         try:
             user = User.objects.get(mobile_no=mobile)

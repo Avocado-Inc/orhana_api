@@ -33,6 +33,11 @@ class AuthService:
 
     @staticmethod
     def verify_auth_access_token(request: Request) -> CurrentUser:
+        """Method to verify token.
+
+        :param request: Request
+        :return CurrentUser
+        """
         token = AuthService.extract_token(request)
         try:
             decoded = jwt.decode(
@@ -93,6 +98,7 @@ class AuthService:
 
     @staticmethod
     def send_otp(mobile_no: str) -> dict:
+        """Method to send otp."""
         otp = random_number_string(n=6)
         # user_otp: UserOtp = UserOtp.objects.filter(
         #     mobile_no=mobile_no,
@@ -114,6 +120,10 @@ class AuthService:
 
     @staticmethod
     def login_mobile(data: LoginDto) -> dict:
+        """Login method.
+
+        :param data: LoginDto
+        """
         validated = AuthService._validate_otp(data.mobile_no, data.otp)
         if validated:
             user, created = UserService.get_user_by_mobile(data.mobile_no)
