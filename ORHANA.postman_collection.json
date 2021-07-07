@@ -23,7 +23,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/auth/validate_otp/",
+							"raw": "http://127.0.0.1:8000/api/v1/auth/validate-otp/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -36,7 +36,7 @@
 								"api",
 								"v1",
 								"auth",
-								"validate_otp",
+								"validate-otp",
 								""
 							]
 						}
@@ -58,7 +58,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/auth/request_otp/",
+							"raw": "http://127.0.0.1:8000/api/v1/auth/request-otp",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -71,7 +71,42 @@
 								"api",
 								"v1",
 								"auth",
-								"request_otp",
+								"request-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "REFRESH ACCESS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNjQxNDI0NH0.eDhU6ILPjxMhLiWQ4aJiCkaouXJA0KNfC9_KyDx11xo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/auth/refresh-access/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh-access",
 								""
 							]
 						}
@@ -91,7 +126,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYzA2Yzg0ZjItMTNmOS00MzY3LWJhNDEtY2E2YjZjMGNhZmZlIiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTYwMTQ4MH0.fKgl02q24kuR2t8NwIrwyA6nNDAB-xoxodgDXvwEUlk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTY3MjE2Mn0.cwJngGbsPSZvVn_1PGpyBW8SoUS81oH_jTWlg1NZeD4",
 									"type": "string"
 								}
 							]
@@ -99,7 +134,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/product/list_products/?sort_key=created_at&sort_direction=-&page=0&limit=10",
+							"raw": "http://127.0.0.1:8000/api/v1/product/?sort_key=max_selling_price&sort_direction=-&page=0&limit=10",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -112,13 +147,12 @@
 								"api",
 								"v1",
 								"product",
-								"list_products",
 								""
 							],
 							"query": [
 								{
 									"key": "sort_key",
-									"value": "created_at"
+									"value": "max_selling_price"
 								},
 								{
 									"key": "sort_direction",
@@ -307,20 +341,236 @@
 				{
 					"name": "GET MY PROFILE",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTg3NDI2NX0.W7_xy9ycLwm7G7RcVDtheSld7bYn4pPLt7pGsqT0ZAQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/user/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								""
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "UPDATE PROFILE",
 					"request": {
-						"method": "GET",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTg3NDI2NX0.W7_xy9ycLwm7G7RcVDtheSld7bYn4pPLt7pGsqT0ZAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
 						"header": [],
-						"url": null
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Pranshul Tiwari\",\n    \"email\": \"tiwaripranshul24@gmail.com\",\n    \"profile_pic_url\": \"optioonal urrl after image upload\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/user/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								""
+							]
+						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "ORDERS",
+			"item": [
+				{
+					"name": "CART ITEMS",
+					"item": [
+						{
+							"name": "ADD ITEM",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTg3NDI2NX0.W7_xy9ycLwm7G7RcVDtheSld7bYn4pPLt7pGsqT0ZAQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"item_id\": \"6d4c2cb8-016c-499b-b07f-5cdb4dba8a49\",\n    \"quantity\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/v1/shopping-cart-item",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"shopping-cart-item"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UPDATE ITEM QUANTITY",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTg3NDI2NX0.W7_xy9ycLwm7G7RcVDtheSld7bYn4pPLt7pGsqT0ZAQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"quantity\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/v1/shopping-cart-item/bf0bfbb3-684e-4a65-88ee-98abaf5e25b5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"shopping-cart-item",
+										"bf0bfbb3-684e-4a65-88ee-98abaf5e25b5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LIST CART ITEMS BY SHOPPING CART",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTg3NDI2NX0.W7_xy9ycLwm7G7RcVDtheSld7bYn4pPLt7pGsqT0ZAQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/v1/shopping-cart-item/shopping-cart/7b653ccb-0347-48a8-80ca-238c45970c82",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"shopping-cart-item",
+										"shopping-cart",
+										"7b653ccb-0347-48a8-80ca-238c45970c82"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LIST CART ITEMS",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNTg3NDI2NX0.W7_xy9ycLwm7G7RcVDtheSld7bYn4pPLt7pGsqT0ZAQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/v1/shopping-cart-item",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"shopping-cart-item"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
