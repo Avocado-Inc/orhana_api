@@ -8,6 +8,7 @@ from fastapi import Request
 
 from .user_service import UserService
 from globals.dto import CurrentUser
+from globals.exceptions import UnauthorizedException
 from globals.utils.string import random_number_string
 from orhana_api.settings import JWT_AUTH
 from users.dto.requests import LoginDto
@@ -26,18 +27,26 @@ class AuthService:
         """
 
         token: str = request.headers.get("authorization")
+        if not token:
+            raise UnauthorizedException()
         return re.sub(JWT_AUTH.get("REGEX"), "", token, 0, re.MULTILINE)
 
     @staticmethod
     def verify_auth_access_token(request: Request) -> CurrentUser:
         token = AuthService.extract_token(request)
-        decoded = jwt.decode(
-            token,
-            JWT_AUTH.get("ACCESS_TOKEN_SECRET"),
-            algorithms=JWT_AUTH.get("ALGORITHM"),
-        )
-        decoded.pop("issuer")
-        decoded.pop("exp")
+        try:
+            decoded = jwt.decode(
+                token,
+                JWT_AUTH.get("ACCESS_TOKEN_SECRET"),
+                algorithms=JWT_AUTH.get("ALGORITHM"),
+            )
+            decoded.pop("issuer")
+            decoded.pop("exp")
+        except jwt.exceptions.ExpiredSignatureError:
+            raise UnauthorizedException(detail="expired")
+        user = UserService.get_user_by_id(decoded.get("user_id"))
+        if not user:
+            raise UnauthorizedException(detail="user with this token does not exists")
         return CurrentUser(**decoded)
 
     @staticmethod
@@ -63,7 +72,7 @@ class AuthService:
         return decoded
 
     @staticmethod
-    def issue_new_tookens_from_refresh_token(request: Request) -> dict:
+    def issue_new_tokens_from_refresh_token(request: Request) -> dict:
         token = AuthService.extract_token(request)
         decoded: dict = jwt.decode(
             token,

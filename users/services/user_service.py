@@ -1,4 +1,5 @@
 from typing import List
+from typing import Tuple
 from uuid import UUID
 
 from users.dto.requests import UserAddressDto
@@ -19,7 +20,7 @@ class UserService:
         return user
 
     @staticmethod
-    def get_user_by_mobile(mobile: str) -> User:
+    def get_user_by_mobile(mobile: str) -> Tuple[User, bool]:
         created = False
         try:
             user = User.objects.get(mobile_no=mobile)

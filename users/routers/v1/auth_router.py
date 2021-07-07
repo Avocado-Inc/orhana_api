@@ -33,7 +33,7 @@ def validate_otp(login_data: LoginDto):
 @auth_api_router.get("/refresh-access")
 def refresh_access(request: Request):
     try:
-        refresh_access_response = AuthService.issue_new_tookens_from_refresh_token(
+        refresh_access_response = AuthService.issue_new_tokens_from_refresh_token(
             request,
         )
         return JSONResponse(
