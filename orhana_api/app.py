@@ -2,9 +2,12 @@ import os
 from importlib.util import find_spec
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.wsgi import WSGIMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from orhana_api.settings import METHODS
+from orhana_api.settings import ORIGINS
 from orhana_api.wsgi import application
 
 
@@ -25,6 +28,12 @@ def create_app() -> FastAPI:
             ),
         ),
         name="static",
+    )
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=ORIGINS,
+        allow_methods=METHODS,
+        allow_headers=["*"],
     )
 
     from inventory.routers.v1 import inventory_app_router

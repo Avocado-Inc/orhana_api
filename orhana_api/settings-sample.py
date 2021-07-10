@@ -23,8 +23,11 @@ SECRET_KEY = "%1&kwz9&3ctpbro38)imhrk$&tl@jg$br%t_+agzc#r4zmnoz7"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost"]
 
+ORIGINS = ["http://localhost:3000", "http://localhost:8000"]
+
+METHODS = ["HEAD", "GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS"]
 
 # Application definition
 
