@@ -22,7 +22,7 @@ class Product(BaseModel):
     )
 
     def get_image_url(self):
-        return self.main_image.url
+        return self.main_image.url if self.main_image else None
 
     image_url = property(get_image_url)
 
@@ -39,6 +39,6 @@ class ProductImage(BaseModel):
         return f"{self.product} - {self.id}"
 
     def get_image_url(self):
-        return self.image.url
+        return self.image.url if self.image else None
 
     image_url = property(get_image_url)
