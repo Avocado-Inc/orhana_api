@@ -11,12 +11,12 @@ from globals.constants import ProductListingSortKey
 from globals.constants import SortDirection
 from globals.dto import CurrentUser
 from globals.exceptions import NotFoundException
+from inventory.dto.response import ProductImageResponse
 from inventory.dto.response import ProductListResponse
 from inventory.dto.response import ProductResponse
 from inventory.models import Product
 from inventory.services import ProductService
 from users.services import AuthService
-
 
 product_router = APIRouter(tags=["Product"])
 
@@ -58,5 +58,21 @@ def get_product_details(
         raise NotFoundException(detail="No product found")
     return JSONResponse(
         content=ProductResponse.from_orm(product).simple_dict(),
+        status_code=status.HTTP_200_OK,
+    )
+
+
+@product_router.get("/{product_id}/images", response_model=List[ProductImageResponse])
+def get_product_image_list(
+    product_id: UUID,
+    current_user: CurrentUser = Depends(AuthService.verify_auth_access_token),
+):
+    product_images = ProductService.get_product_images(product_id)
+    if product_images.count():
+        product_images = parse_obj_as(List[ProductImageResponse], list(product_images))
+    else:
+        product_images = []
+    return JSONResponse(
+        content=[image.simple_dict() for image in product_images],
         status_code=status.HTTP_200_OK,
     )

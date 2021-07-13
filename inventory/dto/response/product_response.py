@@ -12,12 +12,16 @@ class ProductImageResponse(BaseDbResponse):
     image_url: str
     is_main: bool
 
+    @validator("product_id")
+    def validate_product_id(cls, v: Union[UUID, str]):
+        return v.__str__()
+
 
 class ProductListResponse(BaseDbResponse):
     id: Union[UUID, str]
     product_name: str
     max_selling_price: float
-    image: Optional[ProductImageResponse]
+    image_url: Optional[str]
 
     @validator("id")
     def validate_id(cls, v: Union[UUID, str]):
@@ -34,6 +38,7 @@ class ProductResponse(BaseDbResponse):
     max_selling_price: float
     quantity: int
     description: Optional[str]
+    image_url: Optional[str]
 
     @validator("id")
     def validate_id(cls, v: Union[UUID, str]):

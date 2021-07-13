@@ -21,19 +21,24 @@ class Product(BaseModel):
         help_text="Add product description",
     )
 
+    def get_image_url(self):
+        return self.main_image.url
+
+    image_url = property(get_image_url)
+
     def __str__(self):
         return f"{self.product_name} - {self.id}"
 
 
 class ProductImage(BaseModel):
-    product = models.ForeignKey("Product", on_delete=models.CASCADE)
+    product = models.ForeignKey("Product", on_delete=models.CASCADE, null=True)
     image = models.ImageField()
     is_main = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.product} - {self.id}"
 
-    # def get_image_url(self):
-    #     return "{0}{1}".format(settings.MEDIA_URL, self.image.url)
+    def get_image_url(self):
+        return self.image.url
 
-    # image_url = property(get_image_url)
+    image_url = property(get_image_url)

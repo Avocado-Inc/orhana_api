@@ -7,6 +7,7 @@ from pydantic import parse_obj_as
 from inventory.dto.requests import ProductListQueryDto
 from inventory.dto.response import ProductListResponse
 from inventory.models import Product
+from inventory.models import ProductImage
 
 
 class ProductService:
@@ -62,3 +63,8 @@ class ProductService:
     @staticmethod
     def update_product_quantity(id: UUID, quantity: int):
         Product.objects.filter(id=id, is_active=True).update(quantity=quantity)
+
+    @staticmethod
+    def get_product_images(id: UUID):
+        images = ProductImage.objects.filter(product_id=id, is_active=True)
+        return images

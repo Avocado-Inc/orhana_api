@@ -205,6 +205,42 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GET SINGLE PRODUCT ALL IMAGES",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMTQyZWZkMDktZjYxZS00NjMwLTkxOTctM2FmYzNjNzVkZTg1Iiwicm9sZSI6IkNVU1RPTUVSIiwiaXNzdWVyIjoib3JoYW5hX2FwaSIsImV4cCI6MTYyNjU1MTEwNX0.ro9AjFjELE0aIQ8tOL32XQOyFqSoOjP9NBQFf0r0M6Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/v1/product/f3fe54f0-347b-48a8-879d-aedc471ab067/images",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"product",
+								"f3fe54f0-347b-48a8-879d-aedc471ab067",
+								"images"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
