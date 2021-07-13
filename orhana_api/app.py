@@ -8,12 +8,16 @@ from fastapi.staticfiles import StaticFiles
 
 from orhana_api.settings import METHODS
 from orhana_api.settings import ORIGINS
+from orhana_api.settings import VERSION
 from orhana_api.wsgi import application
 
 
 def create_app() -> FastAPI:
 
-    app = FastAPI()
+    app = FastAPI(
+        title="APIs for Orhana Website",
+        version=VERSION,
+    )
 
     # @app.route("/ping")
     # async def ping_api():
