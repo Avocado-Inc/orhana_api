@@ -147,3 +147,4 @@ os.environ.setdefault(
     "GOOGLE_APPLICATION_CREDENTIALS",
     GOOGLE_APPLICATION_CREDENTIALS.__str__(),
 )
+VERSION = "v0.1.1-development"
