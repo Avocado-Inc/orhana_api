@@ -14,3 +14,14 @@ class NotificationChannel:
         ("PUSH", "PUSH"),
         ("EMAIL", "EMAIL"),
     )
+
+
+class NotificationType:
+    class ENUM(str, Enum):
+        TRANSACTIONAL = "TRANSACTIONAL"
+        PROMOTIONAL = "PROMOTIONAL"
+
+    choices = (
+        ("TRANSACTIONAL", "TRANSACTIONAL"),
+        ("PROMOTIONAL", "PROMOTIONAL"),
+    )

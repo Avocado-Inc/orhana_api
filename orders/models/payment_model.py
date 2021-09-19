@@ -9,9 +9,10 @@ class Payment(BaseModel):
     order_session = models.ForeignKey(
         "orders.OrderSession",
         on_delete=models.RESTRICT,
-        default=None,
     )
     total = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_link_generated = models.URLField(null=True, blank=True)
+    meta = models.JSONField(default=dict)
     # rzPay
     # coupon
     def __str__(self):

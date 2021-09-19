@@ -18,17 +18,15 @@ class OrderSession(BaseModel):
     final_total = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        null=True,
-        blank=True,
     )
     tax_percentage = models.DecimalField(max_digits=4, decimal_places=2, default=18.0)
+    payment_link_generated = models.URLField(null=True, blank=True)
 
 
 class Order(BaseModel):
     order_session = models.ForeignKey(
         "OrderSession",
         on_delete=models.RESTRICT,
-        default=None,
     )
     billing_address = models.ForeignKey("users.UserAddress", on_delete=models.RESTRICT)
     shipping_address = models.ForeignKey(
@@ -39,7 +37,6 @@ class Order(BaseModel):
     item = models.ForeignKey(
         "inventory.Product",
         on_delete=models.CASCADE,
-        default=None,
     )
     order_status = models.CharField(
         max_length=GlobalModelConstants.CharLengthConstants.L16,
@@ -49,14 +46,10 @@ class Order(BaseModel):
     final_price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        null=True,
-        blank=True,
     )
     applied_discount_percentage = models.PositiveSmallIntegerField(default=0)
     quantity = models.PositiveIntegerField(default=1)
     unit_price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        null=True,
-        blank=True,
     )
