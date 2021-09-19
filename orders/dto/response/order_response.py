@@ -3,11 +3,11 @@ from uuid import UUID
 
 from .shopping_cart_response import ShoppingCartItemResponse
 from globals.constants import OrderTransitionConstants
-from globals.rest import BaseResponse
+from globals.rest import BaseDbResponse
 from users.dto.response import UserAddressResponse
 
 
-class OrderResponse(BaseResponse):
+class OrderResponse(BaseDbResponse):
     id: UUID
     order_session_id: UUID
     billing_address: UserAddressResponse
@@ -20,7 +20,7 @@ class OrderResponse(BaseResponse):
     applied_discount_percentage: float
 
 
-class OrderSessionResponse(BaseResponse):
+class OrderSessionResponse(BaseDbResponse):
     id: UUID
     final_total: float
     tax_percentage: float
