@@ -56,7 +56,7 @@ def add_item_cart(
         cart_item = ShoppingCartItem.objects.create(
             item_id=body.item_id,
             quantity=body.quantity,
-            unit_price=product.max_selling_price,
+            unit_price=product.selling_price,
             user_id=current_user.user_id,
             shopping_cart=shopping_cart,
         )

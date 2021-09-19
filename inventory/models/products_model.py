@@ -20,6 +20,18 @@ class Product(BaseModel):
         default="Product description",
         help_text="Add product description",
     )
+    selling_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
+    min_selling_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
 
     def get_image_url(self):
         return self.main_image.url if self.main_image else None
